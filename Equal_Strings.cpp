@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 int solve(){
-    int n;
+    int n; 
     cin>>n;
     string a,b;
     cin>>a>>b;

@@ -1,24 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
-int solve(){
+string solve(){
     int n;
     cin>>n;
-    int od_c=0,ev_c=0,x;
-    for(int i=0;i<n;i++){
-        cin>>x;
-        od_c+=x%2;
-        ev_c+=1-x%2;
-    }
-    return min(od_c,ev_c);
+    int no_of_subsets=(1<<n); //2^n
 
+
+    vector<int>arr(n);
+
+    for(auto &it:arr)
+        cin>>it;
+
+    for(int num=0;num<no_of_subsets;num++){
+
+        int sum=0;
+        for(int bit=0;bit<n;bit++){
+
+            if(num&(1<<bit)){
+                sum+=arr[bit];
+            }
+            else{
+                sum-=arr[bit];
+            }
+        }
+
+        if(sum%360==0){
+            return "YES";
+        }
+    }
+
+    return "NO";
 }
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    int t;
-    cin>>t;
-    while(t--)  
-        cout<<solve()<<endl;
+    cout<<solve();
     return 0;
 }

@@ -1,17 +1,39 @@
-#include<iostream>
-#include<vector>
-
+#include<bits/stdc++.h>
 using namespace std;
-int main(){
-    int n,m;
+typedef long long ll;
+typedef unsigned long long ull;
+const ll mod=1e9+7;
+
+ll dp[501][501];
+
+ll memoization(ll a,ll b){
+    if(a==b)
+        return 0;
+    else if(dp[a][b]!=-1)
+        return dp[a][b];
+
+    else{
+        ll mn=INT_MAX;
+
+        //try with every a
+        for(int i=1;i<a;i++){
+            mn=min(mn,1ll+memoization(i,b)+memoization(a-i,b));
+        }
+
+        //try with every b
+        for(int i=1;i<b;i++){
+            mn=min(mn,1ll+memoization(a,i)+memoization(a,b-i));
+        }
+
+        return dp[a][b]=mn;
+    }
+}
+int main()
+{
+    ll n,m;
     cin>>n>>m;
 
-    vector<vector<int>>dp(n+1,vector<int>(m+1,0));
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=m;j++){
-            dp[i][j]=1+min(dp[n-i][m]+dp[i][m-j],dp[n-i][j]+dp[n][m-j]);
-        }
-    }
-    cout<<dp[n][m]<<endl;
+    memset(dp,-1,sizeof(dp));
+    cout<<memoization(n,m)<<endl;
     return 0;
 }

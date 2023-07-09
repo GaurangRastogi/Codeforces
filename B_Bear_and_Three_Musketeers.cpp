@@ -5,7 +5,7 @@ typedef long long int ll;
 //tutorial
 void solve(){
     ll n,m,a,b;
-    cin>>n>>m;
+    cin>>n>>m; 
     vector<vector<ll>>graph(n+1,vector<ll>(n+1,0));
     vector<ll>degree(n+1,0);
     for(int i=0;i<m;i++){
